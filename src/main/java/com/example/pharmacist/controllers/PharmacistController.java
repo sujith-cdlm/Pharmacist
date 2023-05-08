@@ -39,4 +39,33 @@ public class PharmacistController {
         return hashMap;
     }
 
+    @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
+    @ResponseBody
+    public HashMap loginPharmacist(@RequestBody PharmacistModel pharmacistModel){
+        HashMap<String,Object> hashMap = new HashMap<String,Object>();
+        System.out.println("UserName : "+pharmacistModel.getUserName());
+        System.out.println("Password : "+pharmacistModel.getPassword());
+        if(pharmacistModel.getUserName()==null || pharmacistModel.getUserName().isEmpty()){
+            hashMap.put("message","UserName cannot be blank");
+            hashMap.put("status","Failed");
+            return hashMap;
+        }
+        if(pharmacistModel.getPassword()==null || pharmacistModel.getPassword().isEmpty()){
+            hashMap.put("message","Password cannot be blank");
+            hashMap.put("status","Failed");
+            return hashMap;
+        }
+        if(!pharmacistModel.getUserName().isEmpty() && !pharmacistModel.getPassword().isEmpty()){
+            int count = pharmacistRepository.loginPharmacist(pharmacistModel.getUserName(),pharmacistModel.getPassword());
+            if(count>0){
+                hashMap.put("status","Login Success");
+                return hashMap;
+            }else{
+                hashMap.put("status","Login Failed");
+                return hashMap;
+            }
+        }
+        return hashMap;
+    }
+
 }

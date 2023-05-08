@@ -11,4 +11,7 @@ import java.util.List;
 @Repository
 public interface PharmacistRepository extends JpaRepository<PharmacistModel,Integer> {
 
+    @Query(value = "select count(*) from pharmacist_details where user_name=:user_name and password=:password", nativeQuery = true)
+    public int loginPharmacist(@Param("user_name") String user_name, @Param("password") String password);
+
 }

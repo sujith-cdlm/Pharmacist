@@ -24,8 +24,8 @@ public class PharmacistModel {
     String address;
     String designation;
 
-    //@NotEmpty(message = "Email address cannot be blank")
-    //@Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", message = "Invalid Email Address")
+    //@Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    //@NotEmpty(message = "Email cannot be empty")
     String email;
 
     //@NonNull
